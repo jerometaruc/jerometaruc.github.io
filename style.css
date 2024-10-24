@@ -1,0 +1,18 @@
+html, body {
+    background-color: rgb(24, 24, 24);
+    color: rgb(192, 192, 192);
+    height: 90%;
+    line-height: 1.5;
+    align-items: center;
+}
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+}
+
+p {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 24px;
+}
