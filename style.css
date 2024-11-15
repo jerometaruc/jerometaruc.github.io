@@ -1,28 +1,36 @@
-html, body {
-    background-color: rgb(24, 24, 24);
-    color: rgb(192, 192, 192);
-    height: 100%;
-    line-height: 1.5;
+body {
+    font-family: 'Courier New', monospace;
+    background: rgb(120, 120, 120);
+}
+
+.nav-list {
+    background: rgb(90, 90, 90);
+    margin: 0px;
+    padding: 1rem 0;
+    border-radius: 0.2rem;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
+    width: 100%;
+    max-width: device-width;
 }
 
-h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    font-size: 36px;
+.nav-item {
+  list-style: none;
+  margin-right: 2rem;
 }
 
-p {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 24px;
+.nav-item a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: all 200ms ease-in;
 }
 
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 90%;
-    max-width: 1000px;
+.nav-item a:hover {
+  color: rgb(207, 159, 255);
+}
+
+.nav-item:first-child {
+  margin-right: auto;
+  margin-left: 2rem;
 }
