@@ -5,7 +5,7 @@ body {
 
 .nav-list {
     background: rgb(90, 90, 90);
-    margin: 0px;
+    margin: 0;
     padding: 1rem 0;
     border-radius: 0.2rem;
     display: flex;
@@ -20,34 +20,30 @@ body {
     margin-right: 2rem;
 }
 
+.nav-item:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: 2rem;
+}
+
 .nav-item a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     transition: all 200ms ease-in;
 }
 
-.nav-item a:hover {
-    color: rgb(207, 159, 255);
-}
-
-.nav-item:first-child {
-    margin-right: auto;
-    margin-left: 2rem;
-}
-
+.nav-item a:hover,
 .nav-item a.active {
     color: rgb(207, 159, 255);
-  }
+}
 
 .text-container {
-    text-decoration: none;
     color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-right: auto;
-    margin-left: 2rem;
-    margin-top: 1rem;
+    margin: 1rem 2rem 0;
     width: 100%;
     max-width: device-width;
 }
@@ -57,27 +53,22 @@ body {
     color: rgb(207, 159, 255);
 }
 
-.dropdown button {
+.dropdown a {
     font-family: 'Courier New', monospace;
     font-size: 1rem;
     background: rgb(140, 140, 140);
     color: rgb(255, 255, 255);
     border: none;
     border-radius: 0.2rem;
-    padding: 0.5rem 1rem;
+    padding: 10px;
+    font-weight: bold;
+    display: block;
     cursor: pointer;
     transition: all 200ms ease-in;
 }
 
-.dropdown button:hover {
+.dropdown a:hover {
     color: rgb(207, 159, 255);
-    transition: all 200ms ease-in;
-}
-
-.dropdown a {
-    display: block;
-    color: rgb(255, 255, 255);
-    padding: 10px;
 }
 
 .dropdown .content {
