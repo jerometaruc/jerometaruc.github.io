@@ -1,6 +1,6 @@
 Version 1.0 of my personal website.
 
-Built with HTML/CSS and deployed via GitHub Pages.
+Built with **HTML/CSS** and deployed via **GitHub Pages**.
 
 Color codes:
 
