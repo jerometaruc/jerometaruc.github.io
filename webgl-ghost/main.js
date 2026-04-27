@@ -267,9 +267,6 @@ function initTexturesForExample() {
     
     textureArray.push({}) ;
     loadFileTexture(textureArray[textureArray.length-1],"cloth.png") ;
-
-    textureArray.push({}) ;
-    loadFileTexture(textureArray[textureArray.length-1],"lightmap.png") ;
 }
 
 // Changes which texture is active in the array of texture examples (see initTexturesForExample)
