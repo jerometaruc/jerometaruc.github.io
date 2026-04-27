@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: white;
+    }
+    #gl-canvas {
+        width: 512px;
+        height: 512px;
+        display: block;
+    }
+</style>
+
+<script id="vertex-shader" type="x-shader/x-vertex">#version 300 es
+
+    in vec4 vPosition;
+    in vec3 vNormal;
+    in vec2 vTexCoord;
+    
+    out vec3 fNormal;  // Pass normal to the fragment shader
+    out vec3 fPosition; // Pass position to the fragment shader
+    out vec2 fTexCoord; // Pass texture coordinates
+    
+    uniform mat4 modelViewMatrix;
+    uniform mat4 normalMatrix;
+    uniform mat4 projectionMatrix;
+    
+    void main() {
+        fPosition = (modelViewMatrix * vPosition).xyz; 
+        fNormal = normalize((normalMatrix * vec4(vNormal, 0.0)).xyz); 
+        fTexCoord = vTexCoord;
+    
+        gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+    }
+</script>    
+
+<script id="fragment-shader" type="x-shader/x-fragment">#version 300 es
+
+    precision mediump float;
+    
+    uniform sampler2D texture1;
+    uniform sampler2D texture2;
+    uniform int useTextures;
+    
+    // Lighting uniforms
+    uniform vec4 ambientProduct, diffuseProduct, specularProduct;
+    uniform vec4 lightPosition;
+    uniform float shininess;
+    
+    in vec3 fNormal;
+    in vec3 fPosition;
+    in vec2 fTexCoord;
+    
+    layout(location=0) out vec4 fragColor;
+    
+    void main() {
+        vec3 N = normalize(fNormal);   // Normalized normal
+        vec3 L = normalize(lightPosition.xyz - fPosition); // Light direction
+        vec3 V = normalize(-fPosition); // View direction (assumes camera at origin)
+        
+        // Compute the Blinn-Phong Halfway Vector
+        vec3 H = normalize(L + V);
+    
+        // Compute terms in the illumination equation
+        float lightDotNormal = max(dot(L, N), 0.0);
+        vec4 diffuse = diffuseProduct * lightDotNormal;
+    
+        // Blinn-Phong Specular shading
+        float spec = pow(max(dot(N, H), 0.0), shininess);
+        vec4 specular = specularProduct * spec;
+    
+        if (dot(L, N) < 0.0) {
+            specular = vec4(0.0, 0.0, 0.0, 1.0);
+        }
+    
+        vec4 lightingColor = ambientProduct + diffuse + specular;
+        lightingColor.a = 1.0;
+    
+        if (useTextures == 1) {
+            fragColor = texture(texture1, fTexCoord) * lightingColor;
+        } else {
+            fragColor = lightingColor;
+        }
+    }
+</script>    
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="objects.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br/>
+<br/>
+
+<div id="textureToggleButton">
+    <input id="textureToggleButtoni" type="button" value="Toggle Textures"/>
+</div>
+</body>
+</html>
